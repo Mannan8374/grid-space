@@ -4,8 +4,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ['hlqyyeufimgzhcrleyax.supabase.co'],
-
+    domains: ['fmliqecnrxgzwvucipeu.supabase.co'],
   },
 };
 
