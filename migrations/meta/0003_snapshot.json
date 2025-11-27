@@ -1,13 +1,20 @@
 {
-  "version": "5",
-  "dialect": "pg",
-  "id": "6e08bab1-5366-455a-9ab5-aff713371ab5",
-  "prevId": "64d8059e-e381-428d-9ef5-7689974485ad",
+  "id": "c4a9cd91-2783-4a2e-bbad-67df49b1f928",
+  "prevId": "3b844a01-aea5-4eff-97d5-169003bb2d9b",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "collaborators": {
+    "public.collaborators": {
       "name": "collaborators",
       "schema": "",
       "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
         "workspace_id": {
           "name": "workspace_id",
           "type": "uuid",
@@ -60,7 +67,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "files": {
+    "public.files": {
       "name": "files",
       "schema": "",
       "columns": {
@@ -75,7 +82,8 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "title": {
           "name": "title",
@@ -101,12 +109,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "logo": {
-          "name": "logo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
         "banner_url": {
           "name": "banner_url",
           "type": "text",
@@ -117,13 +119,13 @@
           "name": "workspace_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "folder_id": {
           "name": "folder_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -158,7 +160,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "folders": {
+    "public.folders": {
       "name": "folders",
       "schema": "",
       "columns": {
@@ -173,7 +175,8 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "title": {
           "name": "title",
@@ -199,12 +202,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "logo": {
-          "name": "logo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
         "banner_url": {
           "name": "banner_url",
           "type": "text",
@@ -215,7 +212,7 @@
           "name": "workspace_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -237,7 +234,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "subscriptions": {
+    "public.subscriptions": {
       "name": "subscriptions",
       "schema": "",
       "columns": {
@@ -256,6 +253,7 @@
         "status": {
           "name": "status",
           "type": "subscription_status",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
@@ -359,7 +357,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "workspaces": {
+    "public.workspaces": {
       "name": "workspaces",
       "schema": "",
       "columns": {
@@ -374,7 +372,8 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "workspace_owner": {
           "name": "workspace_owner",
@@ -428,8 +427,8 @@
   "enums": {},
   "schemas": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
+    "tables": {}
   }
 }

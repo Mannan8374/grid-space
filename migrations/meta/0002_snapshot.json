@@ -1,10 +1,10 @@
 {
-  "version": "5",
-  "dialect": "pg",
-  "id": "64d8059e-e381-428d-9ef5-7689974485ad",
-  "prevId": "cec1cc2d-0f89-49e1-8cb8-7054c7e2fc74",
+  "id": "3b844a01-aea5-4eff-97d5-169003bb2d9b",
+  "prevId": "dbb79c29-d323-4c16-b03c-49d4208136fa",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "files": {
+    "public.files": {
       "name": "files",
       "schema": "",
       "columns": {
@@ -19,7 +19,8 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "title": {
           "name": "title",
@@ -45,12 +46,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "logo": {
-          "name": "logo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
         "banner_url": {
           "name": "banner_url",
           "type": "text",
@@ -61,13 +56,13 @@
           "name": "workspace_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "folder_id": {
           "name": "folder_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -102,7 +97,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "folders": {
+    "public.folders": {
       "name": "folders",
       "schema": "",
       "columns": {
@@ -117,7 +112,8 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "title": {
           "name": "title",
@@ -143,12 +139,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "logo": {
-          "name": "logo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
         "banner_url": {
           "name": "banner_url",
           "type": "text",
@@ -159,7 +149,7 @@
           "name": "workspace_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -181,7 +171,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "subscriptions": {
+    "public.subscriptions": {
       "name": "subscriptions",
       "schema": "",
       "columns": {
@@ -200,6 +190,7 @@
         "status": {
           "name": "status",
           "type": "subscription_status",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
@@ -303,7 +294,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "workspaces": {
+    "public.workspaces": {
       "name": "workspaces",
       "schema": "",
       "columns": {
@@ -318,7 +309,8 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "workspace_owner": {
           "name": "workspace_owner",
@@ -372,8 +364,8 @@
   "enums": {},
   "schemas": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
+    "tables": {}
   }
 }

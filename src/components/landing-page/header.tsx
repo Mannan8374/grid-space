@@ -1,8 +1,9 @@
-'use client';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import Logo from '../../../public/Logo-blackbg.svg';
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import Logo from "../../../public/Logo-blackbg.svg";
+import { motion } from "framer-motion";
 
 import {
   NavigationMenu,
@@ -14,244 +15,237 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import { cn } from '@/lib/utils';
-import { Button } from '../ui/button';
-
-const routes = [
-  { title: 'Features', href: '#features' },
-  { title: 'Reasources', href: '#resources' },
-  { title: 'Pricing', href: '#pricing' },
-  { title: 'Testimonials', href: '#testimonial' },
-];
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: 'Alert Dialog',
-    href: '#',
+    title: "Alert Dialog",
+    href: "#",
     description:
-      'A modal dialog that interrupts the user with important content and expects a response.',
+      "A modal dialog that interrupts the user with important content and expects a response.",
   },
   {
-    title: 'Hover Card',
-    href: '#',
+    title: "Hover Card",
+    href: "#",
     description:
-      'For sighted users to preview content available behind a link.',
+      "For sighted users to preview content available behind a link.",
   },
   {
-    title: 'Progress',
-    href: '#',
+    title: "Progress",
+    href: "#",
     description:
-      'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
+      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
   },
   {
-    title: 'Scroll-area',
-    href: '#',
-    description: 'Visually or semantically separates content.',
+    title: "Scroll-area",
+    href: "#",
+    description: "Visually or semantically separates content.",
   },
   {
-    title: 'Tabs',
-    href: '#',
+    title: "Tabs",
+    href: "#",
     description:
-      'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
+      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
   },
   {
-    title: 'Tooltip',
-    href: '#',
+    title: "Tooltip",
+    href: "#",
     description:
-      'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
+      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
   },
 ];
 
 const Header = () => {
-  const [path, setPath] = useState('#products');
+  const [Yvalue, setYvalue] = useState(0);
+  const [path, setPath] = useState("#products");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setYvalue(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const components: { title: string; href: string; description: string }[] = [
+    {
+      title: "Alert Dialog",
+      href: "#",
+      description:
+        "A modal dialog that interrupts the user with important content and expects a response.",
+    },
+    {
+      title: "Hover Card",
+      href: "#",
+      description:
+        "For sighted users to preview content available behind a link.",
+    },
+    {
+      title: "Progress",
+      href: "#",
+      description:
+        "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    },
+    {
+      title: "Scroll-area",
+      href: "#",
+      description: "Visually or semantically separates content.",
+    },
+    {
+      title: "Tabs",
+      href: "#",
+      description:
+        "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+    },
+    {
+      title: "Tooltip",
+      href: "#",
+      description:
+        "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+    },
+  ];
+
   return (
-    <header
-      className="p-4
-      flex
-      justify-center
-      items-center
-  "
-    >
-      <Link
-        href={'/'}
-        className="w-full flex
-        justify-left items-center"
-      >
-        <Image
-          src={Logo}
-          alt="Cypress Logo"
-          width={25}
-          height={25}
-        />
-        <span
-          className="font-semibold
-          dark:text-white translate-y-[3px]"
+    <nav className="max-w-7xl fixed top-4 mx-auto inset-x-0 z-50 w-[95%] lg:w-full">
+      <div className=" lg:block w-full ">
+        <motion.div
+          animate={{
+            width: Yvalue > 100 ? "80%" : "100%",
+            backgroundColor: Yvalue > 100 ? "#130b16e1 " : "transparent",
+          }}
+          transition={{
+            duration: 0.4,
+          }}
+          className={`flex relative justify-between  items-center px-4 py-3 rounded-full mx-auto backdrop-blur-3xl bg-[#130b16e1] `}
         >
-          rid Space
-        </span>
-      </Link>
-      <NavigationMenu className="hidden md:block">
-        <NavigationMenuList className="gap-6">
-          <NavigationMenuItem>
-            <NavigationMenuTrigger
-              onClick={() => setPath('#resources')}
-              className={cn({
-                'dark:text-white': path === '#resources',
-                'dark:text-white/40': path !== '#resources',
-                'font-normal': true,
-                'text-xl': true,
-              })}
+          <div className="flex flex-row gap-2 items-center">
+            <Link
+              className="font-normal flex items-center text-sm mr-4 text-black px-2 py-1 relative z-20 "
+              href="/"
             >
-              Resources
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul
-                className="grid
+              <Image src={Logo} alt="Cypress Logo" width={30} height={30} />
+              <span className="text-white font-bold mt-1">rid Space</span>
+            </Link>
+            <div className="">
+              <NavigationMenu className="hidden md:block ">
+                <NavigationMenuList className="gap-2">
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger
+                      onClick={() => setPath("#resources")}
+                      className={cn(
+                        {
+                          "dark:text-white": path === "#resources",
+                          "dark:text-white/70": path !== "#resources",
+                          "font-normal": true,
+                          "text-lg": true,
+                        },
+                        "bg-transparent"
+                      )}
+                    >
+                      Introduction
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul
+                        className="grid
                 gap-3
                 p-6
                 md:w-[400px]
                 ld:w-[500px]
                 lg:grid-cols-[.75fr_1fr]
+                bg-[#030014ba]
                 "
-              >
-                <li className="row-span-3">
-                  <span
-                    className="flex h-full w-full select-none
-                  flex-col
-                  justify-end
-                  rounded-md
-                  bg-gradient-to-b
-                  from-muted/50
-                  to-muted
-                  p-6 no-underline
-                  outline-none
-                  focus:shadow-md
+                      >
+                        <li className="row-span-3 flex items-center justify-center">
+                          <span
+                            className=" flex items-center justify-center text-xl font-semibold 
                   "
-                  >
-                    Welcome
-                  </span>
-                </li>
-                <ListItem
-                  href="#"
-                  title="Introduction"
-                >
-                  Re-usable components built using Radix UI and Tailwind CSS.
-                </ListItem>
-                <ListItem
-                  href="#"
-                  title="Installation"
-                >
-                  How to install dependencies and structure your app.
-                </ListItem>
-                <ListItem
-                  href="#"
-                  title="Typography"
-                >
-                  Styles for headings, paragraphs, lists...etc
-                </ListItem>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger
-              onClick={() => setPath('#pricing')}
-              className={cn({
-                'dark:text-white': path === '#pricing',
-                'dark:text-white/40': path !== '#pricing',
-                'font-normal': true,
-                'text-xl': true,
-              })}
+                          >
+                            Welcome
+                          </span>
+                        </li>
+                        <ListItem href="#" title="who are we">
+                          mordern collobrative document editor
+                        </ListItem>
+                        <ListItem href="#" title="why to choose us">
+                          Advance UI and AI features
+                        </ListItem>
+                        <ListItem href="#" title="some extra information">
+                          We are the best in the market
+                        </ListItem>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <NavigationMenuLink
+                      onClick={() => setPath("#Feature")}
+                      href="#Feature"
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        {
+                          "dark:text-white bg-black": path === "#testimonials",
+                          "dark:text-white/70": path !== "#testimonials",
+                          "font-normal": true,
+                          "text-lg": true,
+                        },
+                        "bg-transparent cursor-pointer"
+                      )}
+                    >
+                      Feature
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuLink
+                      onClick={() => setPath("#testimonials")}
+                      href="#testimonials"
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        {
+                          "dark:text-white bg-black": path === "#testimonials",
+                          "dark:text-white/70": path !== "#testimonials",
+                          "font-normal": true,
+                          "text-lg": true,
+                        },
+                        "bg-transparent cursor-pointer"
+                      )}
+                    >
+                      Testimonial
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
+          </div>
+          <div className="flex space-x-2 items-center">
+            <Link
+              className="group hover:-translate-y-0.5 active:scale-[0.98] relative z-10 bg-transparent hover:border-secondary hover:bg-blue-500 border border-transparent text-white text-sm md:text-sm transition font-medium duration-200 rounded-md px-4 py-2 sm:flex items-center justify-center underline hidden "
+              href="/signup"
             >
-              Pricing
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-3 p-4  md:grid-row-2  ">
-                <ListItem
-                  title="Pro Plan"
-                  href={'#'}
-                >
-                  Unlock full power with collaboration.
-                </ListItem>
-                <ListItem
-                  title={'free Plan'}
-                  href={'#'}
-                >
-                  Great for teams just starting out.
-                </ListItem>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuContent>
-              <ul
-                className="grid w-[400px]
-              gap-3
-              p-4
-              md:w-[500px]
-              md:grid-cols-2 
-              lg:w-[600px]
-              "
-              >
-                {components.map((component) => (
-                  <ListItem
-                    key={component.title}
-                    title={component.title}
-                    href={component.href}
-                  >
-                    {component.description}
-                  </ListItem>
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink
-              className={cn(navigationMenuTriggerStyle(), {
-                'dark:text-white': path === '#testimonials',
-                'dark:text-white/40': path !== '#testimonials',
-                'font-normal': true,
-                'text-xl': true,
-              })}
-            >
-              Testimonial
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-      <aside
-        className="flex
-        w-full
-        gap-2
-        justify-end
-      "
-      >
-        <Link href={'/login'}>
-          <Button
-            variant="btn-secondary"
-            className=" p-1 hidden sm:block"
-          >
-            Login
-          </Button>
-        </Link>
-        <Link href="/signup">
-          <Button
-            variant="btn-primary"
-            className="whitespace-nowrap"
-          >
-            Sign Up
-          </Button>
-        </Link>
-      </aside>
-    </header>
+              Sign-up
+            </Link>
+
+            <Link href={"/login"}>
+              <Button className="group hover:-translate-y-0.5 active:scale-[0.98] bg-secondary relative z-10  border border-secondary text-white  text-sm md:text-sm transition font-medium duration-200 rounded-md px-4 py-2 flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF60_inset,_0px_1px_0px_0px_#FFFFFF60_inset] bg-blue-700 hover:bg-blue-600">
+                Login
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </nav>
   );
 };
 
 export default Header;
 
 const ListItem = React.forwardRef<
-  React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'>
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
     <li>
@@ -259,21 +253,13 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'group block select-none space-y-1 font-medium leading-none'
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
           )}
           {...props}
         >
-          <div className="text-white text-sm font-medium leading-none">
-            {title}
-          </div>
-          <p
-            className="group-hover:text-white/70
-            line-clamp-2
-            text-sm
-            leading-snug
-            text-white/40
-          "
-          >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
         </a>
@@ -281,5 +267,4 @@ const ListItem = React.forwardRef<
     </li>
   );
 });
-
-ListItem.displayName = 'ListItem';
+ListItem.displayName = "ListItem";
